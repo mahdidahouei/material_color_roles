@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_color_roles/bloc/theme_cubit/theme_cubit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -354,60 +355,54 @@ class MainPage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              Color pickedColor = themeCubit.state.seedColor;
-              return AlertDialog(
-                title: const Text('Pick a color!'),
-                content: SingleChildScrollView(
-                  child: ColorPicker(
-                    pickerColor: themeCubit.state.seedColor,
-                    enableAlpha: true,
-                    hexInputBar: true,
-                    onColorChanged: (color) {
-                      pickedColor = color;
-                    },
-                  ),
-                  // Use Material color picker:
-                  //
-                  // child: MaterialPicker(
-                  //   pickerColor: themeCubit.state,
-                  //   onColorChanged: (color) {
-                  //     pickedColor = color;
-                  //   },
-                  // ),
-                  //
-                  // Use Block color picker:
-                  //
-                  // child: BlockPicker(
-                  //   pickerColor: themeCubit.state,
-                  //   onColorChanged: (color) {
-                  //     pickedColor = color;
-                  //   },
-                  // ),
-                  //
-                  // child: MultipleChoiceBlockPicker(
-                  //   pickerColors: currentColors,
-                  //   onColorsChanged: changeColors,
-                  // ),
-                ),
-                actions: <Widget>[
-                  ElevatedButton(
-                    child: const Text('Submit'),
-                    onPressed: () {
-                      themeCubit.changeSeedColor(seedColor: pickedColor);
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () async {
+              await launchUrl(
+                Uri.https("mahdidahouei.com"),
+                webOnlyWindowName: '_blank',
               );
             },
-          );
-        },
-        child: const Icon(Icons.color_lens),
+            tooltip: "Visit my personal website",
+            child: const Icon(Icons.person),
+          ),
+          const SizedBox(height: 8.0),
+          FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  Color pickedColor = themeCubit.state.seedColor;
+                  return AlertDialog(
+                    title: const Text('Pick a color!'),
+                    content: SingleChildScrollView(
+                      child: ColorPicker(
+                        pickerColor: themeCubit.state.seedColor,
+                        enableAlpha: true,
+                        hexInputBar: true,
+                        onColorChanged: (color) {
+                          pickedColor = color;
+                        },
+                      ),
+                    ),
+                    actions: <Widget>[
+                      ElevatedButton(
+                        child: const Text('Submit'),
+                        onPressed: () {
+                          themeCubit.changeSeedColor(seedColor: pickedColor);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Icon(Icons.color_lens),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: isBigEnoughToSplit
