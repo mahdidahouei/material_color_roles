@@ -372,7 +372,7 @@ class MainPage extends StatelessWidget {
                 );
               }
             },
-            // tooltip: "Visit my personal website",
+            tooltip: "https://mahdidahouei.com",
             child: const Icon(Icons.person),
           ),
           const SizedBox(height: 8.0),
