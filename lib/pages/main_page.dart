@@ -50,7 +50,7 @@ class MainPage extends StatelessWidget {
             height: 136.0,
             padding: const EdgeInsets.all(24.0),
             alignment: AlignmentDirectional.centerStart,
-            child: Text(
+            child: SelectableText(
               "$name\n#${getHexStr(color)}",
               style: TextStyle(
                 fontSize: 27,
@@ -73,7 +73,7 @@ class MainPage extends StatelessWidget {
                 horizontal: 24.0,
                 vertical: 16.0,
               ),
-              child: Text(
+              child: SelectableText(
                 "On $name\n#${getHexStr(onColor)}",
                 style: TextStyle(
                   fontSize: 27,
