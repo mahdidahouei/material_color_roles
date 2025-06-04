@@ -27,22 +27,16 @@ class _ThemesAppState extends State<ThemesApp> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, Color>(
+    return BlocBuilder<ThemeCubit, ThemeState>(
       bloc: _themeCubit,
-      builder: (context, seedColor) {
+      builder: (context, state) {
         return BlocProvider.value(
           value: _themeCubit,
           child: MaterialApp(
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
-                brightness: Brightness.light,
-                seedColor: seedColor,
-              ),
-            ),
-            darkTheme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                brightness: Brightness.dark,
-                seedColor: seedColor,
+                brightness: state.brightness,
+                seedColor: state.seedColor,
               ),
             ),
             routes: {"/": (context) => MainPage()},
