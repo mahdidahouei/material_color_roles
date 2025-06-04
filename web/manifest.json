@@ -1,6 +1,6 @@
 {
-    "name": "material_color_roles",
-    "short_name": "material_color_roles",
+    "name": "Material3 color roles",
+    "short_name": "Color roles",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
