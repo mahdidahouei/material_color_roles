@@ -1,10 +1,13 @@
+import 'package:flutter/foundation.dart'; // for kIsWeb
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:material_color_roles/bloc/theme_cubit/theme_cubit.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:url_launcher/url_launcher.dart';
+
+import '../bloc/theme_cubit/theme_cubit.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -360,12 +363,16 @@ class MainPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              await launchUrl(
-                Uri.https("mahdidahouei.com"),
-                webOnlyWindowName: '_blank',
-              );
+              if (kIsWeb) {
+                html.window.open('https://mahdidahouei.com', '_blank');
+              } else {
+                await launchUrl(
+                  Uri.https("mahdidahouei.com"),
+                  webOnlyWindowName: '_blank',
+                );
+              }
             },
-            tooltip: "Visit my personal website",
+            // tooltip: "Visit my personal website",
             child: const Icon(Icons.person),
           ),
           const SizedBox(height: 8.0),
