@@ -1,11 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_color_roles/bloc/theme_cubit/theme_cubit.dart';
 import 'package:material_color_roles/pages/main_page.dart';
 
-class ThemesApp extends StatelessWidget {
+class ThemesApp extends StatefulWidget {
   const ThemesApp({super.key});
 
   @override
+  State<ThemesApp> createState() => _ThemesAppState();
+}
+
+class _ThemesAppState extends State<ThemesApp> {
+  late ThemeCubit _themeCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    _themeCubit = ThemeCubit();
+  }
+
+  @override
+  void dispose() {
+    _themeCubit.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(routes: {"/": (context) => MainPage()});
+    return BlocBuilder<ThemeCubit, Color>(
+      bloc: _themeCubit,
+      builder: (context, seedColor) {
+        return BlocProvider.value(
+          value: _themeCubit,
+          child: MaterialApp(
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                brightness: Brightness.light,
+                seedColor: seedColor,
+              ),
+            ),
+            darkTheme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                brightness: Brightness.dark,
+                seedColor: seedColor,
+              ),
+            ),
+            routes: {"/": (context) => MainPage()},
+          ),
+        );
+      },
+    );
   }
 }

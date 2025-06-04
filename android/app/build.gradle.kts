@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.mahdidahouei.colors.material_color_roles"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
