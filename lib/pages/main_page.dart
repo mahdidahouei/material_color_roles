@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart'; // for kIsWeb
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:universal_platform/universal_platform.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../bloc/theme_cubit/theme_cubit.dart';
@@ -363,7 +363,7 @@ class MainPage extends StatelessWidget {
         children: [
           FloatingActionButton(
             onPressed: () async {
-              if (kIsWeb) {
+              if (UniversalPlatform.isWeb) {
                 html.window.open('https://mahdidahouei.com', '_blank');
               } else {
                 await launchUrl(
@@ -372,8 +372,9 @@ class MainPage extends StatelessWidget {
                 );
               }
             },
+
             tooltip: "https://mahdidahouei.com",
-            child: const Icon(Icons.person),
+            child: const Icon(Icons.language),
           ),
           const SizedBox(height: 8.0),
           FloatingActionButton(
