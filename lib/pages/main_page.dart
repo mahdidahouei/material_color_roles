@@ -302,7 +302,7 @@ class MainPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Light color roles",
+                        isBigEnoughToSplit ? "Light color roles" : (themeData.brightness == Brightness.light ? "Light color roles" : "Dark color roles" ),
                         style: themeData.textTheme.titleLarge!.apply(
                           color: isBigEnoughToSplit
                               ? lightColorScheme.onSurface
