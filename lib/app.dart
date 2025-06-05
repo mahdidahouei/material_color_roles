@@ -37,8 +37,6 @@ class _ThemesAppState extends State<ThemesApp> {
               colorScheme: ColorScheme.fromSeed(
                 brightness: state.brightness,
                 seedColor: state.seedColor,
-
-                primary: Colors.blue,
               ),
               filledButtonTheme: FilledButtonThemeData(style: ButtonStyle()),
             ),
